@@ -1,0 +1,792 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@include font-face($regular, '../fonts/klavika_regular_plain-webfont', $regular);
+@include font-face($medium, '../fonts/klavika_medium_plain-webfont', $medium);
+@include font-face($bold, '../fonts/klavika_bold_bold-webfont', $bold);
+@include font-face($light, '../fonts/klavika_light_plain-webfont', $light);
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: $regular, $fallback-font;
+    font-size: $body-font-size;
+    @include text($body-font-size);
+    @include mq-small {
+        @include text(14px);
+    }
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    @include mq-medium {
+        padding: 0 30px;
+    }
+    @include mq-small {
+        padding: 0 22px;
+    }
+}
+
+%headline {
+    @include text($weight: normal);
+    margin: 0;
+}
+
+%main-menu-style {
+    @include text($h5, $text-tr: uppercase, $family: $medium);
+    text-align: justify;
+}
+
+%input {
+    width: 100%;
+    border: $form-border;
+    border-radius: 2px;
+    outline: none;
+    background: $form-bg;
+    margin-bottom: 1.11em;
+    padding: 0.56em;
+    @include text(1em, $family: $light);
+}
+%a {
+    @include text(0.9em, $white);
+    text-decoration: none;
+}
+
+h5, h3 > span, h6 > span, cite > span,
+p > span:first-child {
+    font-family: $bold;
+}
+
+header  {
+    .header-bg {
+        background: url(../images/bg-header.jpg) center no-repeat;
+        background-size: cover;
+        overflow: hidden;
+        @include mq-small {
+            text-align: center;
+        }
+    }
+    h3 {
+        @extend %headline;
+        @include text($h3, $white, $text-tr: uppercase);
+        margin: 0.75em 0;
+        display: inline-block;
+        @include mq-medium {
+            @include text(1em);
+            margin: 1.3em 0;
+        }
+        @include mq-small {
+            margin: 1em 0;
+        }
+    }
+    
+    nav.about_us {
+        float: right;
+        @include mq-small {
+            display: none;
+        }
+
+        li {
+            display: inline-block;
+            padding-top: 24px;
+
+            &:last-child a {
+                @include mq-medium {
+                    @include text($family:$bold);
+                }
+            }
+
+            &:not(:last-child) {
+                padding-right: 31px;
+            }
+
+            @include mq-medium {
+                padding-top: 43px;
+            }
+        }
+
+        a {
+            @extend %a;
+            @include mq-medium {
+                @include text(0.8em);
+            }
+        }
+    }
+    @include mq-small {
+        .open-nav {
+            cursor: pointer;
+            height: 26px;
+            position: absolute;
+            @include absolute(17px, $right:13px);
+
+            &:before {
+                content: "";
+                display: block;
+                width: 33px;
+                height: 3px;
+                background: $white;
+                border-radius: 10%;
+                box-shadow: 0 8px $white, 0 16px $white;
+            }  
+        }
+    }
+}
+
+nav.main-menu {
+    @extend %main-menu-style;
+    @include mq-small {
+        display: none;
+    }
+
+    li {
+        display: inline-block;
+        @include text($line-height: 2.35em);
+
+        &.has_submenu a:after {
+            content: ">";
+            display: inline-block;
+            @include prefix(transform, rotate(90deg)translate(-2px,-10px), webkit moz ms o);
+            color: $black;
+            @include mq-medium {
+                margin-left: -8px;
+            }
+        }
+        &.helper {
+            width: 100%;
+            height: 0;
+            visibility: hidden;
+        }
+        &:nth-last-child(2) {
+            display: none;
+        }
+    }
+    a {
+        @extend %a;
+        @include text($color: $primary_red);
+        @include mq-medium {
+            @include text(0.78em);
+        }
+    }
+}
+
+.slider-wrapper {
+        margin-top: -20px;
+        @include mq-small {
+            margin-top: -6px;
+        }
+
+        & + .wrapper {
+            position: relative;
+        }   
+
+        .slide-img img {
+                width: 100%;
+        }
+}
+.slick-dotted.slick-slider {
+    margin-bottom: 0;
+}
+.slick-dots {
+    @include absolute(15px, $right:46%);
+    @include mq-small {
+        @include absolute(3px, $right:38%);
+    }
+    li {
+        @include mq-small {
+            margin: 0 -4px;
+        }
+        &.slick-active button:before {
+            opacity: 1;
+            background: $white;
+        }
+
+        button:before {
+            content: "";
+            opacity: 1;
+            border: 2px solid $white;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            @include mq-small {
+                width: 3px;
+                height: 3px;
+            }
+        }
+    }
+}
+  
+h1 { 
+    padding: 0.32em 0.32em 0.2em 0.5em;
+    width: 64.34%;
+    position: absolute;
+    @include absolute($bottom:0, $left:15px);
+    @extend %headline;
+    @include text($h1, $white);
+    @include background-h1;
+    @include mq-medium {
+        @include text(2em, $line-height: 1.2em);
+        @include absolute($left:-1px);
+            width: auto;
+            padding: 0.5em 0.5em 0.5em 0.75em;
+    }
+    @include mq-small {
+        @include text(1.6em);
+        @include absolute($right:0);
+        padding: 9px 22px;
+    }
+}
+
+main {
+    background: $main-bgr;
+
+    article {
+        padding-top: 35px;
+        padding-bottom: 50px;
+        float: left;
+        width: 64.34%;
+        font-family: $fallback-font;
+        @include mq-medium {
+            width: 100%;
+            float: none;
+            overflow: hidden;
+        }
+        @include mq-small {
+            padding: 19px 0 0;
+        }
+
+        h2 {
+            @extend %headline;
+            @include text($h2, $headline-color, $family: $regular);
+            @include mq-small {
+                @include text(1.6em);
+            }
+        }
+    }
+}
+
+h5 {
+    @include text($h5, $headline-color);
+    margin: 1.5em 0 1.1em;
+}
+
+p {
+    @include text($line-height: 1.333em);
+}
+
+section.list {
+    width: 50%;
+    @include mq-small {
+        width: 100%;
+    }
+
+    &:nth-child(n) {
+        float: left;
+    }
+
+    &:nth-child(2n) {
+        float: right;
+    }
+    ul {
+        list-style-image: url(../images/list.png);
+        padding: 0 25px 0 20px;
+        @include text($list-font, $line-height: 1.2em);
+        @include mq-small {
+            padding: 0 22px;
+            @include text(1em);
+        }
+    }
+    li {
+        margin: 20px 0;
+        @include mq-small {
+            margin: 10px 0;
+        }
+    }
+}
+
+aside {
+    width: 30.33%;
+    position: relative;
+    float: right;
+    border-left: 3px solid $border-color;
+    margin-top: -165px;
+    background-color: $main-bgr;
+    padding: 30px 30px 0;
+    @include mq-medium {
+        position: static;
+        float: none;
+        width: 100%;
+        margin-top: 0;
+        padding: 0;
+        border-left: none;
+        border-top: 2px solid $border-color;
+    }
+    :focus {
+        @include inputPlaceholder() {
+            color: transparent;
+        }
+    }
+
+    h4 {
+        margin-bottom: 0.8em;
+        @extend %headline;
+        @include text($h4, $primary_red);
+        @include mq-medium {
+            margin-top: 35px;
+            @include text($h2); 
+        }
+        @include mq-small {
+            @include text(1.5em);
+        }
+    }
+
+    input {
+        @include inputPlaceholder() {
+            @include text(1em, #646464, $family: $light);
+        }
+        &[type="text"] {
+            @extend %input;
+            @include mq-medium {
+                height: 32px;
+            }
+        }
+
+        &[type="checkbox"] {
+            margin-bottom: $h5;
+
+            & + label {
+                @include text($family: $light);
+            }
+        }
+
+        &[type="submit"] {
+            margin-bottom: 0; 
+            background: $submit-bg;
+            border: none;
+            @extend %input;
+            @include text($color: $white, $text-tr: uppercase, $family: $medium);
+            @include mq-small {
+                padding: 0.9em;
+            }
+        }  
+    }
+    textarea {
+        height: 7.6em;
+        @extend %input;
+        @include inputPlaceholder() {
+            @include text(1em, #646464, $family: $light);
+        }
+    }
+ 
+    @include mq-medium {
+        .left-wrapper {
+            width: 50%;
+            padding-right: 10px;
+            margin-bottom: 55px;
+            float: left;
+            @include mq-small {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 0;
+            }
+
+            .checkbox {
+                margin-top: 15px;
+                @include mq-small {
+                   margin-top: 0; 
+                }
+            }
+        }
+        .right-wrapper {
+            float: right;
+            width: 50%;
+            padding-left: 10px;
+            margin-bottom: 55px;
+            @include mq-small {
+                width: 100%;
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+.gallery {
+    background: $gallery-bg;
+    overflow: hidden;
+    padding-bottom: 70px;
+    @include mq-medium {
+        padding-bottom: 0; 
+    }
+ 
+    h2 { 
+        margin: 1.6em 0 1.1em; 
+        @extend %headline;
+        @include text($color: #383838);
+        @include mq-small {
+            margin: 1em 0;
+            @include text(1.6em);
+        }
+    }  
+    section {
+        .photo{
+            width: 68.2%;
+            float: left;
+            @include mq-medium {
+                width: 100%;
+            }
+        }
+        .slider-wrapper {
+            width: 100%-68.2%;
+            float: right;
+            margin: 0;
+            @include mq-medium {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+    }
+
+    figure {
+        float: left;
+        width: 31%;
+        position: relative;
+        margin: 0 2% 2% 0; 
+        @include mq-medium {
+            margin-right: 3.5%;
+        }
+        @include mq-small {
+            width: 49%;
+            margin: 1% 0 1%;
+        }
+        &:nth-child(3n) {
+            @include mq-medium {
+                margin-right: 0;
+            }
+        }
+        &:nth-child(even) {
+            @include mq-small {
+                margin-left: 1%;
+            }
+        }
+        
+        img {
+            width: 100%;
+        }
+    }
+    figcaption {
+        height: 40%;
+        background: $primary_red_transparent;
+        color: $white;
+        padding: 6% 8% 5%;
+        position: absolute;
+        @include absolute(null, 4px, 0, 0);
+        @extend %main-menu-style;
+        @include mq-small {
+            @include absolute($bottom:3px);
+            @include text(0.8em);
+        }
+        
+        & > span {
+            padding-top: 1%;
+            display: block;
+            @include text(0.83rem, $text-tr: none);
+            @include mq-small {
+                @include text(0.9em);
+            }
+        }
+    }
+}   
+.demo-img {
+    position: relative;
+    width: 100%;
+    img {
+        @include mq-medium {
+            width: 100%;
+        }
+    }
+}
+
+.demo-description {
+    margin: 26px;
+    position: absolute;
+    @include absolute($bottom:0);
+    @include text($line-height:2.2em);
+    @include mq-medium {
+        margin-right: 90px;
+        @include absolute($bottom:79px);
+    }
+    @include mq-small {
+        margin-right: 10px;
+        @include absolute($bottom:0);
+    } 
+
+    q {
+        @extend %headline;
+        @include text(2.2em, $white);
+        @include mq-medium {
+            @include text(3em, $line-height:1.25em);
+        }
+        @include mq-small {
+            @include text(2em);
+        }
+    
+        &:before {
+            position: absolute;
+            @include absolute(-8%, $left:-3%);
+            @include text(4em);
+        }
+        &:after {
+            content: no-close-quote;
+        }
+    }
+    cite {
+        display: block;
+        @extend %headline;
+        @include text(0.833em, $white, $font-style:normal, $text-tr:uppercase);
+        @include mq-medium {
+            @include text(1em);
+        }
+        @include mq-small {
+            @include text(0.8em);
+        }
+    }
+}
+
+.demo {   
+    .slick-prev {
+        z-index: 1;
+        @include absolute(8%, $left:80%);
+        @include mq-medium {
+            @include absolute($left:87%);
+        }
+        @include mq-small {
+            @include absolute($left:81%);
+        }
+    
+        &:before {
+            content: '<';
+            @include mq-small {
+                @include text(15px);
+            }
+        }
+    }
+    .slick-next {
+        @include absolute(8%, $right:5%);
+        &:before {
+           content: '>';
+           @include mq-small {
+               @include text(15px);
+           }
+        }
+    }
+}
+
+.slick-slider .slick-track {
+     @include prefix(transform, 1s, webkit moz ms o);
+}
+
+footer {
+    @include text($color: $white);
+    background: url(../images/bg-footer.jpg) center no-repeat;
+    background-size: cover;
+    overflow: hidden;
+
+    h2 {
+        @include text(2em, $text-tr: uppercase, $weight: normal);
+        margin: 1.8em 0 1.25em;
+        @include mq-small {
+            display: none;
+        }
+    }
+
+    .contacts {
+        width: 50%;
+        float: right;
+        padding-left: 115px;
+        overflow: hidden;
+        @include mq-medium {
+            width: 100%;
+            padding-left: 0;
+        }
+
+        h6 {
+            margin: 2.4em 0 1.25em;
+            @include text($h6, $weight:normal);
+            @include mq-medium {
+                @include text(1.4em);
+            }
+        }
+
+        p {
+            padding-bottom: 37px;
+            @include mq-medium {
+                display: block;
+                width: 50%;
+                float: left;
+            }
+            @include mq-small {
+                width: 100%;
+                padding-bottom: 30px;
+                @include text(0.75em);
+            }
+            &> span {
+                display: inline-block;
+                @include text(1.06em,$line-height: 1.67em);
+            }
+
+            &:last-child {
+                @include mq-medium {
+                    float: right;
+                    padding-left: 30px;
+                }
+                @include mq-small {
+                    padding-left: 0;
+                }
+                & > span {
+                    @include mq-small {
+                        display: block;
+                    }
+                }
+            }
+        } 
+    }
+    .items {
+        width: 50%;
+        float: left;
+        padding-right: 15px;
+        overflow: hidden;
+        @include mq-medium {
+            width: 100%;
+        }
+
+        .services {
+            a {  
+                border-bottom: $footer-border;
+                display: block;
+                @include text($line-height: 2.4em);
+                @extend %a;
+                @include mq-medium {
+                    @include text(1em);
+                }
+                    &:empty {
+                        height: 2.4em;
+                        @include mq-small {
+                            display: none;
+                        }
+                    }
+            }
+            &.either {
+                margin-top: 65px;
+                    @include mq-small {
+                        margin-top: 0
+                }
+            }
+            ul:nth-child(odd),
+            &.either ul:nth-child(odd) {
+                width: 50%;
+                float: left;
+                padding-right: 30px;
+                @include mq-small {
+                    width: 100%;
+                } 
+            }
+            ul:nth-child(even),
+            &.either ul:nth-child(even) {
+                width: 50%;
+                float: right;
+                @include mq-small {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    & > h5 {
+        margin-top: 0;
+        margin-bottom: 0.7em;
+        @include text($h5, $white, $text-tr: uppercase);
+        @include mq-small {
+            margin-top: 57px;
+        }
+    }
+}
+.copyright {
+    margin-top: 100px;
+    margin-bottom: 120px;
+    border-top: $footer-border;
+    @include mq-medium {
+        margin-top: 0;
+        margin-bottom: 66px;
+    }
+    
+    p:first-child {
+        @include text(0.6em, $line-height: 2.8em, $family: Arial); 
+        float: left;
+      
+        & > span {
+            font-weight: bold;
+            
+            &:before {
+                content: "";
+                display: inline-block;
+                background: url(../images/sprite.png) 0 -15px no-repeat;
+                height: 18px;
+                width: 18px;
+                vertical-align: top;
+                margin: 5px 8px 0 5px;
+            }
+        }
+    }
+
+    p:last-child {
+        float: right;
+        @include text(0.8em);       
+        @include mq-medium {
+            display: none;
+        }
+    }
+}
+p > span {
+        margin-right: 1.35em;
+}
+ @include mq-small {
+    #tel {
+        margin: 0;
+        text-align: center;
+        @include text(1.5em, #787878, $family:$light);
+    
+        & > span {
+            display: block;
+            padding: 10px 0;
+            @include text(2em, #c72121, $family:inherit);
+        }
+    }
+}
+.to_top {
+    display: none;
+    @include mq-small {
+        display: block;
+        border: 2px solid $white;
+        text-align: center;
+        text-decoration: none;
+        @include text(1.2em,  $white, $line-height:34px);
+    }
+}
+
+
+     
+
+

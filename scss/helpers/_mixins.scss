@@ -1,0 +1,84 @@
+@mixin font-face($family, $path, $svg, $weight:normal, $style:normal) {
+    @font-face {
+        font-family: $family;
+        src: url('#{$path}.eot');
+        src: url('#{$path}.eot?#iefix') format('embedded-opentype'),
+             url('#{$path}.woff2') format('woff2'),
+             url('#{$path}.woff') format('woff'),
+             url('#{$path}.ttf') format('truetype'),
+             url('#{$path}.svg##{$svg}') format('svg');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
+
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: $value;
+  }
+
+  #{$property}: $value;
+}   
+
+@mixin inputPlaceholder() {
+    $selector: '';
+    $prefixes: (
+        moz: "::-moz",
+        webkit: "::-webkit",
+        o: ":-o",
+        ie: ":-ms"
+    );
+    @each $prop, $value in $prefixes {
+        @if $prop != "moz" {
+            $selector: #{$value}-input-placeholder;
+        } @else {
+            $selector: #{$value}-placeholder;
+        }
+        @if & {
+            &#{$selector} {
+                @content;
+            }
+        } @else {
+            #{$selector} {
+                @content;
+            }
+        }
+    }
+    &::placeholder {
+      @content;
+    }
+}
+
+@mixin text($size:null, $color:null, $line-height:null, 
+            $weight:null, $text-tr:null, $family:null, $font-style:null) {
+    font-size: $size;
+    color: $color;
+    line-height: $line-height;
+    font-weight: $weight;
+    text-transform: $text-tr;
+    font-family: $family;
+    font-style: $font-style;
+}
+
+@mixin absolute($top:null, $bottom:null, $left:null, $right:null) {
+    top: $top;
+    bottom: $bottom;
+    left: $left;
+    right: $right;
+}
+@mixin background-h1 {
+    background: url(../images/bg-logo.png) 0 0 no-repeat;
+    background-size: cover;
+}
+
+@mixin mq-medium {
+    @media screen and (max-width: $screen-medium) {
+        @content;
+    }
+}
+@mixin mq-small {
+    @media screen and (max-width: $screen-small) {
+        @content;
+    }
+}
+
