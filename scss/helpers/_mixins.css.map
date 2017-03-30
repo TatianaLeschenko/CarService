@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 {
 "version": 3,
 "mappings": "",
 "sources": [],
 "names": [],
 "file": "_mixins.css"
+=======
+{
+"version": 3,
+"mappings": "",
+"sources": [],
+"names": [],
+"file": "_mixins.css"
+>>>>>>> 94aec45a621a960f47d211f24c314a7bb06f723a
 }
